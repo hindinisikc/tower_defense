@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(24, 23, 24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    
+    background-image: 
+        linear-gradient(rgba(51, 48, 50, 0.438) .1em, transparent .1em), 
+        linear-gradient(90deg, rgba(51, 48, 50, 0.438) .1em, transparent .1em);
+    background-size: 3em 3em;
+}
+
+#circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+   
+    background: 
+    linear-gradient(45deg, transparent, transparent 10%, rgb(43, 255, 0)),
+    linear-gradient(#262626, #141414);
+    animation: rotate 0.5s linear infinite;
+}
+
+#circle:before,
+#circle:after {
+    content: " ";
+    position: absolute;
+    inset: 8px;
+    background: linear-gradient(#161616, #262626);
+    border-radius: inherit;
+}
+
+#circle:before {
+    background: linear-gradient(45deg, transparent, transparent 100%, rgb(5, 114, 1));
+    filter: blur(32px);
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+.enemy {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, rgb(20, 20, 20), rgb(77, 73, 73));
+    border: 2px solid rgb(255, 252, 252);
+    position: absolute;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    animation: pulse 1s infinite alternate;
+}
+
+.enemy.dying {
+    animation: die 0.5s forwards;
+}
+
+@keyframes die {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Glowing Pulse Effect */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+    100% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgb(255, 255, 255);
+    }
+}
+
+.bullet {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: pulse 0.3s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+
+.bullet-trail {
+    width: 10px;
+    height: 6px;
+    background-color: rgba(250, 250, 241, 0.5);
+    position: absolute;
+    border-radius: 50%;
+    animation: fadeOut 0.01s linear forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.5); }
+}
+
+.impact-effect {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(235, 235, 235, 0.151), rgba(255, 255, 255, 0.452), transparent);
+    position: absolute;
+    border-radius: 50%;
+    animation: explode 0.5s linear forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
